@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<meta name="title" content="MiloDocs: " />
+<meta name="description" content="GPU # Nvidia # Ollama supports Nvidia GPUs with compute capability 5.0&#43;.
+Check your compute compatibility to see if your card is supported: https://developer.nvidia.com/cuda-gpus
+Compute Capability Family Cards 9.0 NVIDIA H100 8.9 GeForce RTX 40xx RTX 4090 RTX 4080 RTX 4070 Ti RTX 4060 Ti NVIDIA Professional L4 L40 RTX 6000 8.6 GeForce RTX 30xx RTX 3090 Ti RTX 3090 RTX 3080 Ti RTX 3080 RTX 3070 Ti RTX 3070 RTX 3060 Ti RTX 3060 NVIDIA Professional A40 RTX A6000 RTX A5000 RTX A4000 RTX A3000 RTX A2000 A10 A16 A2 8." />
+<meta name="keywords" content="[]" />
+<meta name="author" content="" />
+
+
+<title> | MiloDocs</title>
+
+  <link rel="stylesheet" href="/css/bundle.css">
+<script src="/js/bundle.cca7746894b8b9b1c4052fd8b832a8e218fe49bcae077ac61493efc3f7ab4e71.js" integrity="sha256-zKd0aJS4ubHEBS/YuDKo4hj&#43;SbyuB3rGFJPvw/erTnE=" crossorigin="anonymous"></script>
+
+</head>
+<body class="bg-white">
+  <header>
+</header><nav id="topNav" class="sticky top-0 z-50 py-2 bg-white">
+    <div class="max-w-screen-xl 2xl:max-w-screen-2xl mx-auto">
+        <div id="topNavItemsContainer" class="flex space-x-2">
+            <a href="/" class="flex items-center">
+    <span class="w-5 h-5">
+            <img src="/images/milo.png" alt="Logo Small" class="w-5"></span>
+</a>
+
+<div id="topNavLinks" class="flex items-center mx-2 space-x-4 text-black transition duration-300 justify-start w-1/3 font-brand font-light text-sm">
+        <a href="/" aria-label="Home" class="hidden md:block">Home</a><a href="/get-started/" aria-label="Get Started" class="hidden md:block">Get Started</a>
+    
+    <div id="topNavPrimaryDropdown" class="hidden md:block relative group z-50">
+        <a href="/" aria-label="Dropdown" class="">Dropdown</a>
+        <div class="absolute left-0 mt-0 w-48 bg-white border border-gray-200 rounded-md overflow-hidden shadow-lg group-hover:block hidden p-1"><a href="/about" aria-label="About Us" class="flex px-4 py-1 text-sm text-black hover:bg-zinc-100 transition duration-100">About Us</a><a href="/services" aria-label="Services" class="flex px-4 py-1 text-sm text-black hover:bg-zinc-100 transition duration-100">Services</a><a href="/contact" aria-label="Contact" class="flex px-4 py-1 text-sm text-black hover:bg-zinc-100 transition duration-100">Contact</a></div>
+    </div></div>
+<div id="topNavSearch" class="flex items-center space-x-4 text-xs">
+    <input type="search" id="searchInput" class="border rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-brand md:w-96 bg-zinc-100 text-black" placeholder="Search..." aria-label="Search" />
+</div><div id="topNavEnd" class="flex w-1/3 justify-end">
+                
+                <div class="flex items-center space-x-4">
+                    <button id="chatTocToggle" aria-label="Toggle Chat" class="hidden md:block"><span class="w-5 h-5"><img id="chatRob" src="/icons/robot.svg" alt="toggle" class="hidden" title="Chat Panel"><img id="chatToc" src="/icons/toc.svg" alt="toggle" class="hidden" title="TOC Panel"></span></button>
+                    <button id="darkModeToggle" aria-label="Toggle Darkmode"><span class="w-5 h-5"><img id="moon" src="/icons/dark.svg" alt="moon" class="hidden" title="Dark Mode"><img id="sun" src="/icons/light.svg" alt="sun" class="hidden" title="Light Mode"></span></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav><main class="max-w-screen-xl 2xl:max-w-screen-2xl mx-auto flex"><aside id="sidebar-left" class="hidden md:flex md:translate-x-0 w-60 text-black">
+    <div id="linkTree" class="sticky top-10 pt-4 h-[calc(100vh-4rem)] overflow-y-auto w-full">
+        
+        
+        
+    </div>
+</aside>
+
+
+
+
+<div id="pageContainer" class="w-full lg:w-3/5"><section id="articleSummarizationContainer" class="hidden border border-dotted m-4 p-4 rounded-md transition-opacity duration-500">
+    <h2 class="text-3xl font-bold text-black mb-4">Article Summarization</h2>
+    <div id="articleSummaryOutput" class="flex items-center justify-center p-4 my-4 bg-zinc-100 rounded-md text-black text-sm transition-all duration-300 ease-in-out">
+        <div class="animate-spin h-5 w-5 mr-3 border-4 border-brand rounded-full border-t-transparent"></div>
+        <p id="generationMessage">Generating summary...</p>
+    </div>
+</section>
+
+  <div class="my-4">
+    <nav aria-label="Breadcrumb Navigation" class="breadcrumb flex flex-wrap text-xs px-2 items-center md:px-4">
+  <ol class="flex space-x-2 md:space-x-4 lg:space-x-6">
+    
+    <li>
+      <a href="//localhost:1313/gpu/" class="text-black px-2 py-1 md:px-4 md:py-2 lg:px-6 rounded shadow-md block tile transition duration-300" aria-label="Breadcrumb Item" aria-current="page">
+          
+      </a>
+    </li>
+  </ol>
+</nav>
+
+  </div>
+  <h1 class="text-black p-4"></h1>
+  <div id="articleContent" class="p-4">
+    
+
+
+
+<h1 id="gpu" class="group block ">
+    GPU
+    <a id="-gpu" href="#-gpu" class="hidden group-hover:inline text-current ml-2">#</a>
+</h1>
+
+
+
+<h2 id="nvidia" class="group block py-4">
+    Nvidia
+    <a id="-nvidia" href="#-nvidia" class="hidden group-hover:inline text-current ml-2">#</a>
+</h2><p>Ollama supports Nvidia GPUs with compute capability 5.0+.</p>
+<p>Check your compute compatibility to see if your card is supported:
+<a href="https://developer.nvidia.com/cuda-gpus">https://developer.nvidia.com/cuda-gpus</a></p>
+<table>
+<thead>
+<tr>
+<th>Compute Capability</th>
+<th>Family</th>
+<th>Cards</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>9.0</td>
+<td>NVIDIA</td>
+<td><code>H100</code></td>
+</tr>
+<tr>
+<td>8.9</td>
+<td>GeForce RTX 40xx</td>
+<td><code>RTX 4090</code> <code>RTX 4080</code> <code>RTX 4070 Ti</code> <code>RTX 4060 Ti</code></td>
+</tr>
+<tr>
+<td></td>
+<td>NVIDIA Professional</td>
+<td><code>L4</code> <code>L40</code> <code>RTX 6000</code></td>
+</tr>
+<tr>
+<td>8.6</td>
+<td>GeForce RTX 30xx</td>
+<td><code>RTX 3090 Ti</code> <code>RTX 3090</code> <code>RTX 3080 Ti</code> <code>RTX 3080</code> <code>RTX 3070 Ti</code> <code>RTX 3070</code> <code>RTX 3060 Ti</code> <code>RTX 3060</code></td>
+</tr>
+<tr>
+<td></td>
+<td>NVIDIA Professional</td>
+<td><code>A40</code> <code>RTX A6000</code> <code>RTX A5000</code> <code>RTX A4000</code> <code>RTX A3000</code> <code>RTX A2000</code> <code>A10</code> <code>A16</code> <code>A2</code></td>
+</tr>
+<tr>
+<td>8.0</td>
+<td>NVIDIA</td>
+<td><code>A100</code> <code>A30</code></td>
+</tr>
+<tr>
+<td>7.5</td>
+<td>GeForce GTX/RTX</td>
+<td><code>GTX 1650 Ti</code> <code>TITAN RTX</code> <code>RTX 2080 Ti</code> <code>RTX 2080</code> <code>RTX 2070</code> <code>RTX 2060</code></td>
+</tr>
+<tr>
+<td></td>
+<td>NVIDIA Professional</td>
+<td><code>T4</code> <code>RTX 5000</code> <code>RTX 4000</code> <code>RTX 3000</code> <code>T2000</code> <code>T1200</code> <code>T1000</code> <code>T600</code> <code>T500</code></td>
+</tr>
+<tr>
+<td></td>
+<td>Quadro</td>
+<td><code>RTX 8000</code> <code>RTX 6000</code> <code>RTX 5000</code> <code>RTX 4000</code></td>
+</tr>
+<tr>
+<td>7.0</td>
+<td>NVIDIA</td>
+<td><code>TITAN V</code> <code>V100</code> <code>Quadro GV100</code></td>
+</tr>
+<tr>
+<td>6.1</td>
+<td>NVIDIA TITAN</td>
+<td><code>TITAN Xp</code> <code>TITAN X</code></td>
+</tr>
+<tr>
+<td></td>
+<td>GeForce GTX</td>
+<td><code>GTX 1080 Ti</code> <code>GTX 1080</code> <code>GTX 1070 Ti</code> <code>GTX 1070</code> <code>GTX 1060</code> <code>GTX 1050</code></td>
+</tr>
+<tr>
+<td></td>
+<td>Quadro</td>
+<td><code>P6000</code> <code>P5200</code> <code>P4200</code> <code>P3200</code> <code>P5000</code> <code>P4000</code> <code>P3000</code> <code>P2200</code> <code>P2000</code> <code>P1000</code> <code>P620</code> <code>P600</code> <code>P500</code> <code>P520</code></td>
+</tr>
+<tr>
+<td></td>
+<td>Tesla</td>
+<td><code>P40</code> <code>P4</code></td>
+</tr>
+<tr>
+<td>6.0</td>
+<td>NVIDIA</td>
+<td><code>Tesla P100</code> <code>Quadro GP100</code></td>
+</tr>
+<tr>
+<td>5.2</td>
+<td>GeForce GTX</td>
+<td><code>GTX TITAN X</code> <code>GTX 980 Ti</code> <code>GTX 980</code> <code>GTX 970</code> <code>GTX 960</code> <code>GTX 950</code></td>
+</tr>
+<tr>
+<td></td>
+<td>Quadro</td>
+<td><code>M6000 24GB</code> <code>M6000</code> <code>M5000</code> <code>M5500M</code> <code>M4000</code> <code>M2200</code> <code>M2000</code> <code>M620</code></td>
+</tr>
+<tr>
+<td></td>
+<td>Tesla</td>
+<td><code>M60</code> <code>M40</code></td>
+</tr>
+<tr>
+<td>5.0</td>
+<td>GeForce GTX</td>
+<td><code>GTX 750 Ti</code> <code>GTX 750</code> <code>NVS 810</code></td>
+</tr>
+<tr>
+<td></td>
+<td>Quadro</td>
+<td><code>K2200</code> <code>K1200</code> <code>K620</code> <code>M1200</code> <code>M520</code> <code>M5000M</code> <code>M4000M</code> <code>M3000M</code> <code>M2000M</code> <code>M1000M</code> <code>K620M</code> <code>M600M</code> <code>M500M</code></td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+<h3 id="gpu-selection" class="group block py-4">
+    GPU Selection
+    <a id="-gpu-selection" href="#-gpu-selection" class="hidden group-hover:inline text-current ml-2">#</a>
+</h3><p>If you have multiple NVIDIA GPUs in your system and want to limit Ollama to use
+a subset, you can set <code>CUDA_VISIBLE_DEVICES</code> to a comma separated list of GPUs.
+Numeric IDs may be used, however ordering may vary, so UUIDs are more reliable.
+You can discover the UUID of your GPUs by running <code>nvidia-smi -L</code> If you want to
+ignore the GPUs and force CPU usage, use an invalid GPU ID (e.g., &ldquo;-1&rdquo;)</p>
+
+
+
+
+<h3 id="laptop-suspend-resume" class="group block py-4">
+    Laptop Suspend Resume
+    <a id="-laptop-suspend-resume" href="#-laptop-suspend-resume" class="hidden group-hover:inline text-current ml-2">#</a>
+</h3><p>On linux, after a suspend/resume cycle, sometimes Ollama will fail to discover
+your NVIDIA GPU, and fallback to running on the CPU.  You can workaround this
+driver bug by reloading the NVIDIA UVM driver with <code>sudo rmmod nvidia_uvm &amp;&amp; sudo modprobe nvidia_uvm</code></p>
+
+
+
+
+<h2 id="amd-radeon" class="group block py-4">
+    AMD Radeon
+    <a id="-amd-radeon" href="#-amd-radeon" class="hidden group-hover:inline text-current ml-2">#</a>
+</h2><p>Ollama supports the following AMD GPUs:</p>
+<table>
+<thead>
+<tr>
+<th>Family</th>
+<th>Cards and accelerators</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AMD Radeon RX</td>
+<td><code>7900 XTX</code> <code>7900 XT</code> <code>7900 GRE</code> <code>7800 XT</code> <code>7700 XT</code> <code>7600 XT</code> <code>7600</code> <code>6950 XT</code> <code>6900 XTX</code> <code>6900XT</code> <code>6800 XT</code> <code>6800</code> <code>Vega 64</code> <code>Vega 56</code></td>
+</tr>
+<tr>
+<td>AMD Radeon PRO</td>
+<td><code>W7900</code> <code>W7800</code> <code>W7700</code> <code>W7600</code> <code>W7500</code> <code>W6900X</code> <code>W6800X Duo</code> <code>W6800X</code> <code>W6800</code> <code>V620</code> <code>V420</code> <code>V340</code> <code>V320</code> <code>Vega II Duo</code> <code>Vega II</code> <code>VII</code> <code>SSG</code></td>
+</tr>
+<tr>
+<td>AMD Instinct</td>
+<td><code>MI300X</code> <code>MI300A</code> <code>MI300</code> <code>MI250X</code> <code>MI250</code> <code>MI210</code> <code>MI200</code> <code>MI100</code> <code>MI60</code> <code>MI50</code></td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+<h3 id="overrides" class="group block py-4">
+    Overrides
+    <a id="-overrides" href="#-overrides" class="hidden group-hover:inline text-current ml-2">#</a>
+</h3><p>Ollama leverages the AMD ROCm library, which does not support all AMD GPUs. In
+some cases you can force the system to try to use a similar LLVM target that is
+close.  For example The Radeon RX 5400 is <code>gfx1034</code> (also known as 10.3.4)
+however, ROCm does not currently support this target. The closest support is
+<code>gfx1030</code>.  You can use the environment variable <code>HSA_OVERRIDE_GFX_VERSION</code> with
+<code>x.y.z</code> syntax.  So for example, to force the system to run on the RX 5400, you
+would set <code>HSA_OVERRIDE_GFX_VERSION=&quot;10.3.0&quot;</code> as an environment variable for the
+server.  If you have an unsupported AMD GPU you can experiment using the list of
+supported types below.</p>
+<p>At this time, the known supported GPU types are the following LLVM Targets.
+This table shows some example GPUs that map to these LLVM targets:</p>
+<table>
+<thead>
+<tr>
+<th><strong>LLVM Target</strong></th>
+<th><strong>An Example GPU</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>gfx900</td>
+<td>Radeon RX Vega 56</td>
+</tr>
+<tr>
+<td>gfx906</td>
+<td>Radeon Instinct MI50</td>
+</tr>
+<tr>
+<td>gfx908</td>
+<td>Radeon Instinct MI100</td>
+</tr>
+<tr>
+<td>gfx90a</td>
+<td>Radeon Instinct MI210</td>
+</tr>
+<tr>
+<td>gfx940</td>
+<td>Radeon Instinct MI300</td>
+</tr>
+<tr>
+<td>gfx941</td>
+<td></td>
+</tr>
+<tr>
+<td>gfx942</td>
+<td></td>
+</tr>
+<tr>
+<td>gfx1030</td>
+<td>Radeon PRO V620</td>
+</tr>
+<tr>
+<td>gfx1100</td>
+<td>Radeon PRO W7900</td>
+</tr>
+<tr>
+<td>gfx1101</td>
+<td>Radeon PRO W7700</td>
+</tr>
+<tr>
+<td>gfx1102</td>
+<td>Radeon RX 7600</td>
+</tr>
+</tbody>
+</table>
+<p>AMD is working on enhancing ROCm v6 to broaden support for families of GPUs in a
+future release which should increase support for more GPUs.</p>
+<p>Reach out on <a href="https://discord.gg/ollama">Discord</a> or file an
+<a href="https://github.com/ollama/ollama/issues">issue</a> for additional help.</p>
+
+
+
+
+<h3 id="gpu-selection-1" class="group block py-4">
+    GPU Selection
+    <a id="-gpu-selection-1" href="#-gpu-selection-1" class="hidden group-hover:inline text-current ml-2">#</a>
+</h3><p>If you have multiple AMD GPUs in your system and want to limit Ollama to use a
+subset, you can set <code>HIP_VISIBLE_DEVICES</code> to a comma separated list of GPUs.
+You can see the list of devices with <code>rocminfo</code>.  If you want to ignore the GPUs
+and force CPU usage, use an invalid GPU ID (e.g., &ldquo;-1&rdquo;)</p>
+
+
+
+
+<h3 id="container-permission" class="group block py-4">
+    Container Permission
+    <a id="-container-permission" href="#-container-permission" class="hidden group-hover:inline text-current ml-2">#</a>
+</h3><p>In some Linux distributions, SELinux can prevent containers from
+accessing the AMD GPU devices.  On the host system you can run
+<code>sudo setsebool container_use_devices=1</code> to allow containers to use devices.</p>
+
+
+
+
+<h3 id="metal-apple-gpus" class="group block py-4">
+    Metal (Apple GPUs)
+    <a id="-metal-apple-gpus" href="#-metal-apple-gpus" class="hidden group-hover:inline text-current ml-2">#</a>
+</h3><p>Ollama supports GPU acceleration on Apple devices via the Metal API.</p>
+
+  </div>
+  <div class="p-4">
+    
+<div class="mt-8 flex justify-between items-center">
+    
+        <a href="/faq/" class="tile text-black py-2 px-4 rounded-r-md transition duration-300">  </a>
+    
+
+    
+        <a href="/import/" class="tile text-black py-2 px-4 rounded-l-md transition duration-300">  </a>
+    
+</div>
+  </div>
+
+    </div><div id="searchResultsContainer" class="hidden w-full lg:w-3/5 p-4" data-productFilter="">
+    
+</div><aside id="sidebar-right" class="hidden lg:block w-60">
+  
+    <div id="tocContainer" class="hidden toc sticky top-10 pt-4 h-[calc(100vh-4rem)] overflow-y-auto text-sm text-black transition duration-300"> 
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#nvidia">Nvidia</a>
+      <ul>
+        <li><a href="#gpu-selection">GPU Selection</a></li>
+        <li><a href="#laptop-suspend-resume">Laptop Suspend Resume</a></li>
+      </ul>
+    </li>
+    <li><a href="#amd-radeon">AMD Radeon</a>
+      <ul>
+        <li><a href="#overrides">Overrides</a></li>
+        <li><a href="#gpu-selection-1">GPU Selection</a></li>
+        <li><a href="#container-permission">Container Permission</a></li>
+        <li><a href="#metal-apple-gpus">Metal (Apple GPUs)</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+</div>
+  
+  
+    <div id="chatContainer" class="hidden sticky top-16 h-[calc(100vh-5rem)] flex flex-col flex justify-end">
+    <div id="chat-messages" class="flex flex-col overflow-y-auto text-base">
+    </div>
+    <div id="chat-controls" class="flex flex-row text-xs mt-2">
+        <form id="chat-form" class="flex flex-row">
+            <input id="question" type="text" aria-label="Question Input" placeholder="Ask the docs" class="h-10 border rounded-lg p-1 mr-1 focus:outline-none focus:ring-2 focus:ring-brand" />
+            <button id="sendButton" aria-label="Send" class="flex items-center bg-brand my-1  hover:bg-black text-white p-1 mr-1 rounded-lg shadow-lg transition duration-300"><img src="/icons/send.svg" alt="Send" class="w-5 h-5"></button>
+        </form>
+        <button id="clearAll" aria-label="Delete All"  class="flex items-center bg-black my-1 hover:bg-red-600 text-white p-1 rounded-lg shadow-lg transition duration-300"><img src="/icons/delete.svg" alt="Delete" class="w-5 h-5"></button>
+    </div>
+</div>
+  
+</aside>
+</main>
+  <footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/algoliasearch@latest/dist/algoliasearch-lite.umd.js" defer></script>
+</footer>
+</body>
+</html>

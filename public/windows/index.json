@@ -1,0 +1,17 @@
+{
+    "id": "3e44722f300b9d926b8a94aa7aeb0fd0",
+    "title": "Windows",
+    "description":"no description",
+    "lastCommit": "0001-01-01 00:00:00 +0000 UTC",
+    "version": "<no value>.<no value>.<no value>",
+    "section":"no section",
+    "parent": "MiloDocs",
+    "isPage":true,
+    "isSection":false,
+    "pageKind":"page",
+    "bundleType":"",
+    "uri": "//localhost:1313/windows/",
+    "relURI": "/windows/",
+    "body": "\u0026laquo;\u0026laquo;\u0026laquo;\u0026lt; HEAD\nOllama Windows Preview # Welcome to the Ollama Windows preview.\nNo more WSL required!\nOllama now runs as a native Windows application, including NVIDIA and AMD Radeon GPU support. After installing Ollama Windows Preview, Ollama will run in the background and the ollama command line is available in cmd, powershell or your favorite terminal application. As usual the Ollama api will be served on http://localhost:11434.\nAs this is a preview release, you should expect a few bugs here and there. If you run into a problem you can reach out on Discord, or file an issue. Logs will often be helpful in diagnosing the problem (see Troubleshooting below)\nSystem Requirements # Windows 10 or newer, Home or Pro NVIDIA 452.39 or newer Drivers if you have an NVIDIA card AMD Radeon Driver https://www.amd.com/en/support if you have a Radeon card API Access # Here\u0026rsquo;s a quick example showing API access from powershell\n(Invoke-WebRequest -method POST -Body \u0026#39;{\u0026#34;model\u0026#34;:\u0026#34;llama3\u0026#34;, \u0026#34;prompt\u0026#34;:\u0026#34;Why is the sky blue?\u0026#34;, \u0026#34;stream\u0026#34;: false}\u0026#39; -uri http://localhost:11434/api/generate ).Content | ConvertFrom-json Copy Troubleshooting # While we\u0026rsquo;re in preview, OLLAMA_DEBUG is always enabled, which adds a \u0026ldquo;view logs\u0026rdquo; menu item to the app, and increses logging for the GUI app and server.\nOllama on Windows stores files in a few different locations. You can view them in the explorer window by hitting \u0026lt;cmd\u0026gt;+R and type in:\nexplorer %LOCALAPPDATA%\\Ollama contains logs, and downloaded updates app.log contains logs from the GUI application server.log contains the server logs upgrade.log contains log output for upgrades explorer %LOCALAPPDATA%\\Programs\\Ollama contains the binaries (The installer adds this to your user PATH) explorer %HOMEPATH%\\.ollama contains models and configuration explorer %TEMP% contains temporary executable files in one or more ollama* directories ",
+    "tags": []
+}

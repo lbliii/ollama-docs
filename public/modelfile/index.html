@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<meta name="title" content="MiloDocs: " />
+<meta name="description" content="Ollama Model File # Note: Modelfile syntax is in development
+A model file is the blueprint to create and share models with Ollama.
+Table of Contents # Format Examples Instructions FROM (Required) Build from llama3 Build from a bin file PARAMETER Valid Parameters and Values TEMPLATE Template Variables SYSTEM ADAPTER LICENSE MESSAGE Notes Format # The format of the Modelfile:
+# comment INSTRUCTION arguments Copy Instruction Description FROM (required) Defines the base model to use." />
+<meta name="keywords" content="[]" />
+<meta name="author" content="" />
+
+
+<title> | MiloDocs</title>
+
+  <link rel="stylesheet" href="/css/bundle.css">
+<script src="/js/bundle.cca7746894b8b9b1c4052fd8b832a8e218fe49bcae077ac61493efc3f7ab4e71.js" integrity="sha256-zKd0aJS4ubHEBS/YuDKo4hj&#43;SbyuB3rGFJPvw/erTnE=" crossorigin="anonymous"></script>
+
+</head>
+<body class="bg-white">
+  <header>
+</header><nav id="topNav" class="sticky top-0 z-50 py-2 bg-white">
+    <div class="max-w-screen-xl 2xl:max-w-screen-2xl mx-auto">
+        <div id="topNavItemsContainer" class="flex space-x-2">
+            <a href="/" class="flex items-center">
+    <span class="w-5 h-5">
+            <img src="/images/milo.png" alt="Logo Small" class="w-5"></span>
+</a>
+
+<div id="topNavLinks" class="flex items-center mx-2 space-x-4 text-black transition duration-300 justify-start w-1/3 font-brand font-light text-sm">
+        <a href="/" aria-label="Home" class="hidden md:block">Home</a><a href="/get-started/" aria-label="Get Started" class="hidden md:block">Get Started</a>
+    
+    <div id="topNavPrimaryDropdown" class="hidden md:block relative group z-50">
+        <a href="/" aria-label="Dropdown" class="">Dropdown</a>
+        <div class="absolute left-0 mt-0 w-48 bg-white border border-gray-200 rounded-md overflow-hidden shadow-lg group-hover:block hidden p-1"><a href="/about" aria-label="About Us" class="flex px-4 py-1 text-sm text-black hover:bg-zinc-100 transition duration-100">About Us</a><a href="/services" aria-label="Services" class="flex px-4 py-1 text-sm text-black hover:bg-zinc-100 transition duration-100">Services</a><a href="/contact" aria-label="Contact" class="flex px-4 py-1 text-sm text-black hover:bg-zinc-100 transition duration-100">Contact</a></div>
+    </div></div>
+<div id="topNavSearch" class="flex items-center space-x-4 text-xs">
+    <input type="search" id="searchInput" class="border rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-brand md:w-96 bg-zinc-100 text-black" placeholder="Search..." aria-label="Search" />
+</div><div id="topNavEnd" class="flex w-1/3 justify-end">
+                
+                <div class="flex items-center space-x-4">
+                    <button id="chatTocToggle" aria-label="Toggle Chat" class="hidden md:block"><span class="w-5 h-5"><img id="chatRob" src="/icons/robot.svg" alt="toggle" class="hidden" title="Chat Panel"><img id="chatToc" src="/icons/toc.svg" alt="toggle" class="hidden" title="TOC Panel"></span></button>
+                    <button id="darkModeToggle" aria-label="Toggle Darkmode"><span class="w-5 h-5"><img id="moon" src="/icons/dark.svg" alt="moon" class="hidden" title="Dark Mode"><img id="sun" src="/icons/light.svg" alt="sun" class="hidden" title="Light Mode"></span></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav><main class="max-w-screen-xl 2xl:max-w-screen-2xl mx-auto flex"><aside id="sidebar-left" class="hidden md:flex md:translate-x-0 w-60 text-black">
+    <div id="linkTree" class="sticky top-10 pt-4 h-[calc(100vh-4rem)] overflow-y-auto w-full">
+        
+        
+        
+    </div>
+</aside>
+
+
+
+
+<div id="pageContainer" class="w-full lg:w-3/5"><section id="articleSummarizationContainer" class="hidden border border-dotted m-4 p-4 rounded-md transition-opacity duration-500">
+    <h2 class="text-3xl font-bold text-black mb-4">Article Summarization</h2>
+    <div id="articleSummaryOutput" class="flex items-center justify-center p-4 my-4 bg-zinc-100 rounded-md text-black text-sm transition-all duration-300 ease-in-out">
+        <div class="animate-spin h-5 w-5 mr-3 border-4 border-brand rounded-full border-t-transparent"></div>
+        <p id="generationMessage">Generating summary...</p>
+    </div>
+</section>
+
+  <div class="my-4">
+    <nav aria-label="Breadcrumb Navigation" class="breadcrumb flex flex-wrap text-xs px-2 items-center md:px-4">
+  <ol class="flex space-x-2 md:space-x-4 lg:space-x-6">
+    
+    <li>
+      <a href="//localhost:1313/modelfile/" class="text-black px-2 py-1 md:px-4 md:py-2 lg:px-6 rounded shadow-md block tile transition duration-300" aria-label="Breadcrumb Item" aria-current="page">
+          
+      </a>
+    </li>
+  </ol>
+</nav>
+
+  </div>
+  <h1 class="text-black p-4"></h1>
+  <div id="articleContent" class="p-4">
+    
+
+
+
+<h1 id="ollama-model-file" class="group block ">
+    Ollama Model File
+    <a id="-ollama-model-file" href="#-ollama-model-file" class="hidden group-hover:inline text-current ml-2">#</a>
+</h1><blockquote>
+<p>Note: <code>Modelfile</code> syntax is in development</p>
+</blockquote>
+<p>A model file is the blueprint to create and share models with Ollama.</p>
+
+
+
+
+<h2 id="table-of-contents" class="group block py-4">
+    Table of Contents
+    <a id="-table-of-contents" href="#-table-of-contents" class="hidden group-hover:inline text-current ml-2">#</a>
+</h2><ul>
+<li><a href="#format">Format</a></li>
+<li><a href="#examples">Examples</a></li>
+<li><a href="#instructions">Instructions</a>
+<ul>
+<li><a href="#from-required">FROM (Required)</a>
+<ul>
+<li><a href="#build-from-llama3">Build from llama3</a></li>
+<li><a href="#build-from-a-bin-file">Build from a bin file</a></li>
+</ul>
+</li>
+<li><a href="#parameter">PARAMETER</a>
+<ul>
+<li><a href="#valid-parameters-and-values">Valid Parameters and Values</a></li>
+</ul>
+</li>
+<li><a href="#template">TEMPLATE</a>
+<ul>
+<li><a href="#template-variables">Template Variables</a></li>
+</ul>
+</li>
+<li><a href="#system">SYSTEM</a></li>
+<li><a href="#adapter">ADAPTER</a></li>
+<li><a href="#license">LICENSE</a></li>
+<li><a href="#message">MESSAGE</a></li>
+</ul>
+</li>
+<li><a href="#notes">Notes</a></li>
+</ul>
+
+
+
+
+<h2 id="format" class="group block py-4">
+    Format
+    <a id="-format" href="#-format" class="hidden group-hover:inline text-current ml-2">#</a>
+</h2><p>The format of the <code>Modelfile</code>:</p>
+<div class="codeblock relative bg-zinc-800 rounded text-sm p-4">
+    <pre tabindex="0"><code class="language-modelfile" data-lang="modelfile"># comment
+INSTRUCTION arguments</code></pre>
+    <button class="copy-btn absolute top-2 right-2 bg-zinc-600 hover:bg-zinc-900 transition duration-300 text-white rounded px-2 py-1 text-xs focus:outline-none" onclick="copyCodeToClipboard(this)">Copy</button>
+</div>
+
+<table>
+<thead>
+<tr>
+<th>Instruction</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="#from-required"><code>FROM</code></a> (required)</td>
+<td>Defines the base model to use.</td>
+</tr>
+<tr>
+<td><a href="#parameter"><code>PARAMETER</code></a></td>
+<td>Sets the parameters for how Ollama will run the model.</td>
+</tr>
+<tr>
+<td><a href="#template"><code>TEMPLATE</code></a></td>
+<td>The full prompt template to be sent to the model.</td>
+</tr>
+<tr>
+<td><a href="#system"><code>SYSTEM</code></a></td>
+<td>Specifies the system message that will be set in the template.</td>
+</tr>
+<tr>
+<td><a href="#adapter"><code>ADAPTER</code></a></td>
+<td>Defines the (Q)LoRA adapters to apply to the model.</td>
+</tr>
+<tr>
+<td><a href="#license"><code>LICENSE</code></a></td>
+<td>Specifies the legal license.</td>
+</tr>
+<tr>
+<td><a href="#message"><code>MESSAGE</code></a></td>
+<td>Specify message history.</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+<h2 id="examples" class="group block py-4">
+    Examples
+    <a id="-examples" href="#-examples" class="hidden group-hover:inline text-current ml-2">#</a>
+</h2>
+
+
+
+<h3 id="basic-modelfile" class="group block py-4">
+    Basic <code>Modelfile</code>
+    <a id="-basic-modelfile" href="#-basic-modelfile" class="hidden group-hover:inline text-current ml-2">#</a>
+</h3><p>An example of a <code>Modelfile</code> creating a mario blueprint:</p>
+<div class="codeblock relative bg-zinc-800 rounded text-sm p-4">
+    <pre tabindex="0"><code class="language-modelfile" data-lang="modelfile">FROM llama3
+# sets the temperature to 1 [higher is more creative, lower is more coherent]
+PARAMETER temperature 1
+# sets the context window size to 4096, this controls how many tokens the LLM can use as context to generate the next token
+PARAMETER num_ctx 4096
+
+# sets a custom system message to specify the behavior of the chat assistant
+SYSTEM You are Mario from super mario bros, acting as an assistant.</code></pre>
+    <button class="copy-btn absolute top-2 right-2 bg-zinc-600 hover:bg-zinc-900 transition duration-300 text-white rounded px-2 py-1 text-xs focus:outline-none" onclick="copyCodeToClipboard(this)">Copy</button>
+</div>
+
+<p>To use this:</p>
+<ol>
+<li>Save it as a file (e.g. <code>Modelfile</code>)</li>
+<li><code>ollama create choose-a-model-name -f &lt;location of the file e.g. ./Modelfile&gt;'</code></li>
+<li><code>ollama run choose-a-model-name</code></li>
+<li>Start using the model!</li>
+</ol>
+<p>More examples are available in the <a href="../examples">examples directory</a>.</p>
+<p>To view the Modelfile of a given model, use the <code>ollama show --modelfile</code> command.</p>
+<div class="codeblock relative bg-zinc-800 rounded text-sm p-4">
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>&gt; ollama show --modelfile llama3
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Modelfile generated by &#34;ollama show&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># To build a new Modelfile based on this one, replace the FROM line with:</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># FROM llama3:latest</span>
+</span></span><span style="display:flex;"><span>FROM /Users/pdevine/.ollama/models/blobs/sha256-00e1317cbf74d901080d7100f57580ba8dd8de57203072dc6f668324ba545f29
+</span></span><span style="display:flex;"><span>TEMPLATE <span style="color:#e6db74">&#34;&#34;&#34;{{ if .System }}&lt;|start_header_id|&gt;system&lt;|end_header_id|&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">{{ .System }}&lt;|eot_id|&gt;{{ end }}{{ if .Prompt }}&lt;|start_header_id|&gt;user&lt;|end_header_id|&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">{{ .Prompt }}&lt;|eot_id|&gt;{{ end }}&lt;|start_header_id|&gt;assistant&lt;|end_header_id|&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">{{ .Response }}&lt;|eot_id|&gt;&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>PARAMETER stop <span style="color:#e6db74">&#34;&lt;|start_header_id|&gt;&#34;</span>
+</span></span><span style="display:flex;"><span>PARAMETER stop <span style="color:#e6db74">&#34;&lt;|end_header_id|&gt;&#34;</span>
+</span></span><span style="display:flex;"><span>PARAMETER stop <span style="color:#e6db74">&#34;&lt;|eot_id|&gt;&#34;</span>
+</span></span><span style="display:flex;"><span>PARAMETER stop <span style="color:#e6db74">&#34;&lt;|reserved_special_token&#34;</span></span></span></code></pre></div>
+    <button class="copy-btn absolute top-2 right-2 bg-zinc-600 hover:bg-zinc-900 transition duration-300 text-white rounded px-2 py-1 text-xs focus:outline-none" onclick="copyCodeToClipboard(this)">Copy</button>
+</div>
+
+
+
+
+
+<h2 id="instructions" class="group block py-4">
+    Instructions
+    <a id="-instructions" href="#-instructions" class="hidden group-hover:inline text-current ml-2">#</a>
+</h2>
+
+
+
+<h3 id="from-required" class="group block py-4">
+    FROM (Required)
+    <a id="-from-required" href="#-from-required" class="hidden group-hover:inline text-current ml-2">#</a>
+</h3><p>The <code>FROM</code> instruction defines the base model to use when creating a model.</p>
+<div class="codeblock relative bg-zinc-800 rounded text-sm p-4">
+    <pre tabindex="0"><code class="language-modelfile" data-lang="modelfile">FROM &lt;model name&gt;:&lt;tag&gt;</code></pre>
+    <button class="copy-btn absolute top-2 right-2 bg-zinc-600 hover:bg-zinc-900 transition duration-300 text-white rounded px-2 py-1 text-xs focus:outline-none" onclick="copyCodeToClipboard(this)">Copy</button>
+</div>
+
+
+
+
+
+<h4 id="build-from-llama3" class="group block py-4">
+    Build from llama3
+    <a id="-build-from-llama3" href="#-build-from-llama3" class="hidden group-hover:inline text-current ml-2">#</a>
+</h4><div class="codeblock relative bg-zinc-800 rounded text-sm p-4">
+    <pre tabindex="0"><code class="language-modelfile" data-lang="modelfile">FROM llama3</code></pre>
+    <button class="copy-btn absolute top-2 right-2 bg-zinc-600 hover:bg-zinc-900 transition duration-300 text-white rounded px-2 py-1 text-xs focus:outline-none" onclick="copyCodeToClipboard(this)">Copy</button>
+</div>
+
+<p>A list of available base models:
+<a href="https://github.com/ollama/ollama#model-library">https://github.com/ollama/ollama#model-library</a></p>
+
+
+
+
+<h4 id="build-from-a-bin-file" class="group block py-4">
+    Build from a <code>bin</code> file
+    <a id="-build-from-a-bin-file" href="#-build-from-a-bin-file" class="hidden group-hover:inline text-current ml-2">#</a>
+</h4><div class="codeblock relative bg-zinc-800 rounded text-sm p-4">
+    <pre tabindex="0"><code class="language-modelfile" data-lang="modelfile">FROM ./ollama-model.bin</code></pre>
+    <button class="copy-btn absolute top-2 right-2 bg-zinc-600 hover:bg-zinc-900 transition duration-300 text-white rounded px-2 py-1 text-xs focus:outline-none" onclick="copyCodeToClipboard(this)">Copy</button>
+</div>
+
+<p>This bin file location should be specified as an absolute path or relative to the <code>Modelfile</code> location.</p>
+
+
+
+
+<h3 id="parameter" class="group block py-4">
+    PARAMETER
+    <a id="-parameter" href="#-parameter" class="hidden group-hover:inline text-current ml-2">#</a>
+</h3><p>The <code>PARAMETER</code> instruction defines a parameter that can be set when the model is run.</p>
+<div class="codeblock relative bg-zinc-800 rounded text-sm p-4">
+    <pre tabindex="0"><code class="language-modelfile" data-lang="modelfile">PARAMETER &lt;parameter&gt; &lt;parametervalue&gt;</code></pre>
+    <button class="copy-btn absolute top-2 right-2 bg-zinc-600 hover:bg-zinc-900 transition duration-300 text-white rounded px-2 py-1 text-xs focus:outline-none" onclick="copyCodeToClipboard(this)">Copy</button>
+</div>
+
+
+
+
+
+<h4 id="valid-parameters-and-values" class="group block py-4">
+    Valid Parameters and Values
+    <a id="-valid-parameters-and-values" href="#-valid-parameters-and-values" class="hidden group-hover:inline text-current ml-2">#</a>
+</h4><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Value Type</th>
+<th>Example Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>mirostat</td>
+<td>Enable Mirostat sampling for controlling perplexity. (default: 0, 0 = disabled, 1 = Mirostat, 2 = Mirostat 2.0)</td>
+<td>int</td>
+<td>mirostat 0</td>
+</tr>
+<tr>
+<td>mirostat_eta</td>
+<td>Influences how quickly the algorithm responds to feedback from the generated text. A lower learning rate will result in slower adjustments, while a higher learning rate will make the algorithm more responsive. (Default: 0.1)</td>
+<td>float</td>
+<td>mirostat_eta 0.1</td>
+</tr>
+<tr>
+<td>mirostat_tau</td>
+<td>Controls the balance between coherence and diversity of the output. A lower value will result in more focused and coherent text. (Default: 5.0)</td>
+<td>float</td>
+<td>mirostat_tau 5.0</td>
+</tr>
+<tr>
+<td>num_ctx</td>
+<td>Sets the size of the context window used to generate the next token. (Default: 2048)</td>
+<td>int</td>
+<td>num_ctx 4096</td>
+</tr>
+<tr>
+<td>repeat_last_n</td>
+<td>Sets how far back for the model to look back to prevent repetition. (Default: 64, 0 = disabled, -1 = num_ctx)</td>
+<td>int</td>
+<td>repeat_last_n 64</td>
+</tr>
+<tr>
+<td>repeat_penalty</td>
+<td>Sets how strongly to penalize repetitions. A higher value (e.g., 1.5) will penalize repetitions more strongly, while a lower value (e.g., 0.9) will be more lenient. (Default: 1.1)</td>
+<td>float</td>
+<td>repeat_penalty 1.1</td>
+</tr>
+<tr>
+<td>temperature</td>
+<td>The temperature of the model. Increasing the temperature will make the model answer more creatively. (Default: 0.8)</td>
+<td>float</td>
+<td>temperature 0.7</td>
+</tr>
+<tr>
+<td>seed</td>
+<td>Sets the random number seed to use for generation. Setting this to a specific number will make the model generate the same text for the same prompt. (Default: 0)</td>
+<td>int</td>
+<td>seed 42</td>
+</tr>
+<tr>
+<td>stop</td>
+<td>Sets the stop sequences to use. When this pattern is encountered the LLM will stop generating text and return. Multiple stop patterns may be set by specifying multiple separate <code>stop</code> parameters in a modelfile.</td>
+<td>string</td>
+<td>stop &ldquo;AI assistant:&rdquo;</td>
+</tr>
+<tr>
+<td>tfs_z</td>
+<td>Tail free sampling is used to reduce the impact of less probable tokens from the output. A higher value (e.g., 2.0) will reduce the impact more, while a value of 1.0 disables this setting. (default: 1)</td>
+<td>float</td>
+<td>tfs_z 1</td>
+</tr>
+<tr>
+<td>num_predict</td>
+<td>Maximum number of tokens to predict when generating text. (Default: 128, -1 = infinite generation, -2 = fill context)</td>
+<td>int</td>
+<td>num_predict 42</td>
+</tr>
+<tr>
+<td>top_k</td>
+<td>Reduces the probability of generating nonsense. A higher value (e.g. 100) will give more diverse answers, while a lower value (e.g. 10) will be more conservative. (Default: 40)</td>
+<td>int</td>
+<td>top_k 40</td>
+</tr>
+<tr>
+<td>top_p</td>
+<td>Works together with top-k. A higher value (e.g., 0.95) will lead to more diverse text, while a lower value (e.g., 0.5) will generate more focused and conservative text. (Default: 0.9)</td>
+<td>float</td>
+<td>top_p 0.9</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+<h3 id="template" class="group block py-4">
+    TEMPLATE
+    <a id="-template" href="#-template" class="hidden group-hover:inline text-current ml-2">#</a>
+</h3><p><code>TEMPLATE</code> of the full prompt template to be passed into the model. It may include (optionally) a system message, a user&rsquo;s message and the response from the model. Note: syntax may be model specific. Templates use Go <a href="https://pkg.go.dev/text/template">template syntax</a>.</p>
+
+
+
+
+<h4 id="template-variables" class="group block py-4">
+    Template Variables
+    <a id="-template-variables" href="#-template-variables" class="hidden group-hover:inline text-current ml-2">#</a>
+</h4><table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>{{ .System }}</code></td>
+<td>The system message used to specify custom behavior.</td>
+</tr>
+<tr>
+<td><code>{{ .Prompt }}</code></td>
+<td>The user prompt message.</td>
+</tr>
+<tr>
+<td><code>{{ .Response }}</code></td>
+<td>The response from the model. When generating a response, text after this variable is omitted.</td>
+</tr>
+</tbody>
+</table>
+<div class="codeblock relative bg-zinc-800 rounded text-sm p-4">
+    <pre tabindex="0"><code>TEMPLATE &#34;&#34;&#34;{{ if .System }}&lt;|im_start|&gt;system
+{{ .System }}&lt;|im_end|&gt;
+{{ end }}{{ if .Prompt }}&lt;|im_start|&gt;user
+{{ .Prompt }}&lt;|im_end|&gt;
+{{ end }}&lt;|im_start|&gt;assistant
+&#34;&#34;&#34;</code></pre>
+    <button class="copy-btn absolute top-2 right-2 bg-zinc-600 hover:bg-zinc-900 transition duration-300 text-white rounded px-2 py-1 text-xs focus:outline-none" onclick="copyCodeToClipboard(this)">Copy</button>
+</div>
+
+
+
+
+
+<h3 id="system" class="group block py-4">
+    SYSTEM
+    <a id="-system" href="#-system" class="hidden group-hover:inline text-current ml-2">#</a>
+</h3><p>The <code>SYSTEM</code> instruction specifies the system message to be used in the template, if applicable.</p>
+<div class="codeblock relative bg-zinc-800 rounded text-sm p-4">
+    <pre tabindex="0"><code class="language-modelfile" data-lang="modelfile">SYSTEM &#34;&#34;&#34;&lt;system message&gt;&#34;&#34;&#34;</code></pre>
+    <button class="copy-btn absolute top-2 right-2 bg-zinc-600 hover:bg-zinc-900 transition duration-300 text-white rounded px-2 py-1 text-xs focus:outline-none" onclick="copyCodeToClipboard(this)">Copy</button>
+</div>
+
+
+
+
+
+<h3 id="adapter" class="group block py-4">
+    ADAPTER
+    <a id="-adapter" href="#-adapter" class="hidden group-hover:inline text-current ml-2">#</a>
+</h3><p>The <code>ADAPTER</code> instruction is an optional instruction that specifies any LoRA adapter that should apply to the base model. The value of this instruction should be an absolute path or a path relative to the Modelfile and the file must be in a GGML file format. The adapter should be tuned from the base model otherwise the behaviour is undefined.</p>
+<div class="codeblock relative bg-zinc-800 rounded text-sm p-4">
+    <pre tabindex="0"><code class="language-modelfile" data-lang="modelfile">ADAPTER ./ollama-lora.bin</code></pre>
+    <button class="copy-btn absolute top-2 right-2 bg-zinc-600 hover:bg-zinc-900 transition duration-300 text-white rounded px-2 py-1 text-xs focus:outline-none" onclick="copyCodeToClipboard(this)">Copy</button>
+</div>
+
+
+
+
+
+<h3 id="license" class="group block py-4">
+    LICENSE
+    <a id="-license" href="#-license" class="hidden group-hover:inline text-current ml-2">#</a>
+</h3><p>The <code>LICENSE</code> instruction allows you to specify the legal license under which the model used with this Modelfile is shared or distributed.</p>
+<div class="codeblock relative bg-zinc-800 rounded text-sm p-4">
+    <pre tabindex="0"><code class="language-modelfile" data-lang="modelfile">LICENSE &#34;&#34;&#34;
+&lt;license text&gt;
+&#34;&#34;&#34;</code></pre>
+    <button class="copy-btn absolute top-2 right-2 bg-zinc-600 hover:bg-zinc-900 transition duration-300 text-white rounded px-2 py-1 text-xs focus:outline-none" onclick="copyCodeToClipboard(this)">Copy</button>
+</div>
+
+
+
+
+
+<h3 id="message" class="group block py-4">
+    MESSAGE
+    <a id="-message" href="#-message" class="hidden group-hover:inline text-current ml-2">#</a>
+</h3><p>The <code>MESSAGE</code> instruction allows you to specify a message history for the model to use when responding. Use multiple iterations of the MESSAGE command to build up a conversation which will guide the model to answer in a similar way.</p>
+<div class="codeblock relative bg-zinc-800 rounded text-sm p-4">
+    <pre tabindex="0"><code class="language-modelfile" data-lang="modelfile">MESSAGE &lt;role&gt; &lt;message&gt;</code></pre>
+    <button class="copy-btn absolute top-2 right-2 bg-zinc-600 hover:bg-zinc-900 transition duration-300 text-white rounded px-2 py-1 text-xs focus:outline-none" onclick="copyCodeToClipboard(this)">Copy</button>
+</div>
+
+
+
+
+
+<h4 id="valid-roles" class="group block py-4">
+    Valid roles
+    <a id="-valid-roles" href="#-valid-roles" class="hidden group-hover:inline text-current ml-2">#</a>
+</h4><table>
+<thead>
+<tr>
+<th>Role</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>system</td>
+<td>Alternate way of providing the SYSTEM message for the model.</td>
+</tr>
+<tr>
+<td>user</td>
+<td>An example message of what the user could have asked.</td>
+</tr>
+<tr>
+<td>assistant</td>
+<td>An example message of how the model should respond.</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+<h4 id="example-conversation" class="group block py-4">
+    Example conversation
+    <a id="-example-conversation" href="#-example-conversation" class="hidden group-hover:inline text-current ml-2">#</a>
+</h4><div class="codeblock relative bg-zinc-800 rounded text-sm p-4">
+    <pre tabindex="0"><code class="language-modelfile" data-lang="modelfile">MESSAGE user Is Toronto in Canada?
+MESSAGE assistant yes
+MESSAGE user Is Sacramento in Canada?
+MESSAGE assistant no
+MESSAGE user Is Ontario in Canada?
+MESSAGE assistant yes</code></pre>
+    <button class="copy-btn absolute top-2 right-2 bg-zinc-600 hover:bg-zinc-900 transition duration-300 text-white rounded px-2 py-1 text-xs focus:outline-none" onclick="copyCodeToClipboard(this)">Copy</button>
+</div>
+
+
+
+
+
+<h2 id="notes" class="group block py-4">
+    Notes
+    <a id="-notes" href="#-notes" class="hidden group-hover:inline text-current ml-2">#</a>
+</h2><ul>
+<li>the <strong><code>Modelfile</code> is not case sensitive</strong>. In the examples, uppercase instructions are used to make it easier to distinguish it from arguments.</li>
+<li>Instructions can be in any order. In the examples, the <code>FROM</code> instruction is first to keep it easily readable.</li>
+</ul>
+
+  </div>
+  <div class="p-4">
+    
+<div class="mt-8 flex justify-between items-center">
+    
+        <a href="/linux/" class="tile text-black py-2 px-4 rounded-r-md transition duration-300">  </a>
+    
+
+    
+        <a href="/openai/" class="tile text-black py-2 px-4 rounded-l-md transition duration-300">  </a>
+    
+</div>
+  </div>
+
+    </div><div id="searchResultsContainer" class="hidden w-full lg:w-3/5 p-4" data-productFilter="">
+    
+</div><aside id="sidebar-right" class="hidden lg:block w-60">
+  
+    <div id="tocContainer" class="hidden toc sticky top-10 pt-4 h-[calc(100vh-4rem)] overflow-y-auto text-sm text-black transition duration-300"> 
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#table-of-contents">Table of Contents</a></li>
+    <li><a href="#format">Format</a></li>
+    <li><a href="#examples">Examples</a>
+      <ul>
+        <li><a href="#basic-modelfile">Basic <code>Modelfile</code></a></li>
+      </ul>
+    </li>
+    <li><a href="#instructions">Instructions</a>
+      <ul>
+        <li><a href="#from-required">FROM (Required)</a></li>
+        <li><a href="#parameter">PARAMETER</a></li>
+        <li><a href="#template">TEMPLATE</a></li>
+        <li><a href="#system">SYSTEM</a></li>
+        <li><a href="#adapter">ADAPTER</a></li>
+        <li><a href="#license">LICENSE</a></li>
+        <li><a href="#message">MESSAGE</a></li>
+      </ul>
+    </li>
+    <li><a href="#notes">Notes</a></li>
+  </ul>
+</nav>
+</div>
+  
+  
+    <div id="chatContainer" class="hidden sticky top-16 h-[calc(100vh-5rem)] flex flex-col flex justify-end">
+    <div id="chat-messages" class="flex flex-col overflow-y-auto text-base">
+    </div>
+    <div id="chat-controls" class="flex flex-row text-xs mt-2">
+        <form id="chat-form" class="flex flex-row">
+            <input id="question" type="text" aria-label="Question Input" placeholder="Ask the docs" class="h-10 border rounded-lg p-1 mr-1 focus:outline-none focus:ring-2 focus:ring-brand" />
+            <button id="sendButton" aria-label="Send" class="flex items-center bg-brand my-1  hover:bg-black text-white p-1 mr-1 rounded-lg shadow-lg transition duration-300"><img src="/icons/send.svg" alt="Send" class="w-5 h-5"></button>
+        </form>
+        <button id="clearAll" aria-label="Delete All"  class="flex items-center bg-black my-1 hover:bg-red-600 text-white p-1 rounded-lg shadow-lg transition duration-300"><img src="/icons/delete.svg" alt="Delete" class="w-5 h-5"></button>
+    </div>
+</div>
+  
+</aside>
+</main>
+  <footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/algoliasearch@latest/dist/algoliasearch-lite.umd.js" defer></script>
+</footer>
+</body>
+</html>

@@ -1,0 +1,17 @@
+{
+    "id": "04c6e90faac2675aa89e2176d2eec7d8",
+    "title": "Readme",
+    "description":"no description",
+    "lastCommit": "0001-01-01 00:00:00 +0000 UTC",
+    "version": "<no value>.<no value>.<no value>",
+    "section":"no section",
+    "parent": "MiloDocs",
+    "isPage":true,
+    "isSection":false,
+    "pageKind":"page",
+    "bundleType":"",
+    "uri": "//localhost:1313/readme/",
+    "relURI": "/readme/",
+    "body": " Documentation # Getting Started # Quickstart Examples Importing models Linux Documentation Windows Documentation Docker Documentation Reference # API Reference Modelfile Reference OpenAI Compatibility Resources # Troubleshooting Guide FAQ Development guide ",
+    "tags": []
+}
